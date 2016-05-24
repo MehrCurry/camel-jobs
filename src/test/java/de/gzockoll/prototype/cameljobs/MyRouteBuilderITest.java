@@ -39,7 +39,7 @@ public class MyRouteBuilderITest {
     @Rule
     public TemporaryFolder folder2 = new TemporaryFolder();
 
-    public List<Command> commandList;
+    private List<Command> commandList;
 
     @Before
     public void setUp() {
@@ -76,14 +76,14 @@ public class MyRouteBuilderITest {
                 throw new RuntimeException(e);
             }
         });
-        commands.forEach(c -> submit(c));
+        commands.forEach(this::submit);
         SECONDS.sleep(60);
     }
 
     @Test
     public void testCopy() throws InterruptedException {
         Path temp1 = folder1.getRoot().toPath();
-        Path temp2 = folder1.getRoot().toPath();
+        Path temp2 = folder2.getRoot().toPath();
 
         range(1, 100).forEach(i -> {
             Path aPath = temp1.resolve(String.format("copy%d.txt", i));
@@ -95,7 +95,7 @@ public class MyRouteBuilderITest {
                 throw new RuntimeException(e);
             }
         });
-        SECONDS.sleep(10);
+        SECONDS.sleep(30);
     }
 
     @Test
