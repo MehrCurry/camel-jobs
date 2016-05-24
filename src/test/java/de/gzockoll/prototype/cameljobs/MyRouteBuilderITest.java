@@ -90,7 +90,8 @@ public class MyRouteBuilderITest {
             Path dest = temp2.resolve(String.format("copy%d.txt", i));
             try {
                 Files.write(aPath, "Test".getBytes());
-                submit(new CopyFileCommand(FAST,aPath.toFile().getAbsolutePath(), dest.toFile().getAbsolutePath(), true));
+                final CopyFileCommand command = new CopyFileCommand(FAST, aPath.toFile().getAbsolutePath(), dest.toFile().getAbsolutePath(), true);
+                submit(command);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
